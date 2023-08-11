@@ -1,0 +1,45 @@
+table {
+  border: 2px solid #3c8dbc;
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 20px;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.header-category {
+  border: 1px solid #3c8dbc;
+  text-align: center;
+  vertical-align: middle;
+  padding: 3px;
+  width: 50px;
+  background-color: #e2e2e2;
+}
+
+.header-subcategory {
+  border: 1px solid #3c8dbc;
+  text-align: center;
+  vertical-align: middle;
+  padding: 3px;
+  width: 50px;
+  background-color: #e2e2e2;
+}
+
+.theory-header {
+  border: 1px solid #3c8dbc;
+  text-align: center;
+  vertical-align: middle;
+  padding: 3px;
+  width: 50px;
+  background-color: #ccccff;
+}
+
+.lab-header {
+  border: 1px solid #3c8dbc;
+  text-align: center;
+  vertical-align: middle;
+  padding: 3px;
+  width: 50px;
+  background-color: #ccccff;
+}
