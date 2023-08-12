@@ -1,6 +1,11 @@
 import React from "react";
 import "./ViewTable.css";
-import { headerRowTheoryEnd, headerRowTheoryStart } from "./constants";
+import {
+  headerRowTheoryEnd,
+  headerRowTheoryStart,
+  headerRowLabStart,
+  headerRowLabEnd,
+} from "./constants";
 
 export interface ViewTableProps {}
 
@@ -52,10 +57,17 @@ const ViewTable = ({}: ViewTableProps) => {
         <tr>
           <BlockHeaderCategory>{`LAB`}</BlockHeaderCategory>
           <BlockHeaderSubCategory>{`START`}</BlockHeaderSubCategory>
-          {/* {headerRowTheoryStart.map((header, index) => ())} */}
+          {headerRowLabStart.map((header, index) => (
+            <BlockLabHeader key={index}>{header}</BlockLabHeader>
+          ))}
         </tr>
         <tr>
           <BlockHeaderSubCategory>{`END`}</BlockHeaderSubCategory>
+          {
+            headerRowLabEnd.map((header, index)=>(
+              <BlockLabHeader key={index}>{header}</BlockLabHeader>
+            ))
+          }
         </tr>
       </thead>
     </table>
