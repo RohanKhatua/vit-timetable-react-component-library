@@ -65,3 +65,40 @@ export const headerRowLabEnd = [
   "19:20",
   "-",
 ] as const;
+
+export const daysOfWeek = [
+  "MON",
+  "TUE",
+  "WED",
+  "THU",
+  "FRI",
+  "SAT",
+  "SUN",
+] as const;
+
+export const theorySlotMap = new Map<string, string[]>([
+  ["MON", ["A1", "F1", "D1", "TB1", "TG1", "-", "Lunch", "A2", "F2", "D2", "TB2", "TG2", "-", "V3"]],
+  ["TUE", ["A1", "F1", "D1", "TB1", "TG1", "-", "Lunch", "A2", "F2", "D2", "TB2", "TG2", "-", "V3"]],
+  ["WED", ["A1", "F1", "D1", "TB1", "TG1", "-", "Lunch", "A2", "F2", "D2", "TB2", "TG2", "-", "V3"]],
+  ["THU", ["A1", "F1", "D1", "TB1", "TG1", "-", "Lunch", "A2", "F2", "D2", "TB2", "TG2", "-", "V3"]],
+  ["FRI", ["A1", "F1", "D1", "TB1", "TG1", "-", "Lunch", "A2", "F2", "D2", "TB2", "TG2", "-", "V3"]],
+  ["SAT", ["A1", "F1", "D1", "TB1", "TG1", "-", "Lunch", "A2", "F2", "D2", "TB2", "TG2", "-", "V3"]],
+  ["SUN", ["A1", "F1", "D1", "TB1", "TG1", "-", "Lunch", "A2", "F2", "D2", "TB2", "TG2", "-", "V3"]],
+]
+);
+
+export const labSlotMap = new Map<string, string[]>([
+  ["MON", ["A1", "F1", "D1", "TB1", "TG1", "-", "Lunch", "A2", "F2", "D2", "TB2", "TG2", "-", "V3"]],
+  ["TUE", ["A1", "F1", "D1", "TB1", "TG1", "-", "Lunch", "A2", "F2", "D2", "TB2", "TG2", "-", "V3"]],
+  ["WED", ["A1", "F1", "D1", "TB1", "TG1", "-", "Lunch", "A2", "F2", "D2", "TB2", "TG2", "-", "V3"]],
+  ["THU", ["A1", "F1", "D1", "TB1", "TG1", "-", "Lunch", "A2", "F2", "D2", "TB2", "TG2", "-", "V3"]],
+  ["FRI", ["A1", "F1", "D1", "TB1", "TG1", "-", "Lunch", "A2", "F2", "D2", "TB2", "TG2", "-", "V3"]],
+  ["SAT", ["A1", "F1", "D1", "TB1", "TG1", "-", "Lunch", "A2", "F2", "D2", "TB2", "TG2", "-", "V3"]],
+  ["SUN", ["A1", "F1", "D1", "TB1", "TG1", "-", "Lunch", "A2", "F2", "D2", "TB2", "TG2", "-", "V3"]],
+]
+);
+
+
+
+
+

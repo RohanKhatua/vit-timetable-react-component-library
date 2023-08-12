@@ -5,11 +5,29 @@ import {
   headerRowTheoryStart,
   headerRowLabStart,
   headerRowLabEnd,
+  theorySlotMap,
+  labSlotMap,
+  daysOfWeek,
 } from "./constants";
 
 export interface ViewTableProps {}
 
 interface BlockHeaderProps {
+  children: string;
+}
+
+interface CourseProps {
+  code: string;
+  slot: string;
+  type: string;
+  venue: string;
+}
+
+interface EmptyCourseProps {
+  children: string;
+}
+
+interface dayOfWeekProps {
   children: string;
 }
 
@@ -35,6 +53,35 @@ function BlockTheoryHeader({ children }: BlockHeaderProps) {
 
 function BlockLabHeader({ children }: BlockHeaderProps) {
   return <td className="lab-header">{children}</td>;
+}
+
+function CourseComponent({ code, slot, type, venue }: CourseProps) {
+  var data: string = code + slot + type + venue;
+  return <td className="course-component">{data}</td>;
+}
+
+function EmptyCourseComponent({ children }: EmptyCourseProps) {
+  return <td className="empty-course">{children}</td>;
+}
+
+function FullDayComponent({ children }: dayOfWeekProps) {
+  return (
+    <>
+      <tr>
+        <BlockHeaderCategory>{children}</BlockHeaderCategory>
+        <BlockHeaderSubCategory>{"Theory"}</BlockHeaderSubCategory>
+        {theorySlotMap.get(children)?.map((slot, index) => (
+          <EmptyCourseComponent key={index}>{slot}</EmptyCourseComponent>
+        ))}
+      </tr>
+      <tr>
+        <BlockHeaderSubCategory>{"Lab"}</BlockHeaderSubCategory>        
+        {labSlotMap.get(children)?.map((slot, index) => (
+          <EmptyCourseComponent key={index}>{slot}</EmptyCourseComponent>
+        ))}
+      </tr>
+    </>
+  );
 }
 
 const ViewTable = ({}: ViewTableProps) => {
@@ -63,13 +110,16 @@ const ViewTable = ({}: ViewTableProps) => {
         </tr>
         <tr>
           <BlockHeaderSubCategory>{`END`}</BlockHeaderSubCategory>
-          {
-            headerRowLabEnd.map((header, index)=>(
-              <BlockLabHeader key={index}>{header}</BlockLabHeader>
-            ))
-          }
+          {headerRowLabEnd.map((header, index) => (
+            <BlockLabHeader key={index}>{header}</BlockLabHeader>
+          ))}
         </tr>
-      </thead>
+      </thead>      
+      <tbody>
+        {daysOfWeek.map((day, index) => (
+          <FullDayComponent key={index}>{day}</FullDayComponent>
+        ))}
+      </tbody>
     </table>
   );
 };

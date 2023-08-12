@@ -43,3 +43,21 @@ table {
   width: 50px;
   background-color: #ccccff;
 }
+
+.course-component {
+  border: 1px solid #3c8dbc;
+  text-align: center;
+  vertical-align: middle;
+  padding: 3px;
+  width: 50px;
+  background-color: #CCFF33;
+}
+
+.empty-course {
+  border: 1px solid #3c8dbc;
+  text-align: center;
+  vertical-align: middle;
+  padding: 3px;
+  width: 50px;
+  background-color: #FFFFCC;
+}
