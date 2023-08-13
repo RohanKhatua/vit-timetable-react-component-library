@@ -10,25 +10,29 @@ import {
   daysOfWeek,
 } from "./constants";
 
-export interface ViewTableProps {}
-
 interface BlockHeaderProps {
   children: string;
 }
 
-interface CourseProps {
+export interface Course {
   code: string;
   slot: string;
   type: string;
   venue: string;
 }
 
-interface EmptyCourseProps {
+// An array of Course is passed to ViewTable
+export interface ViewTableProps {
+  children: Course[];
+}
+
+interface EmptyCourse {
   children: string;
 }
 
 interface dayOfWeekProps {
-  children: string;
+  day: string;
+  slotToCourse: Map<string, Course>;
 }
 
 function BlockHeaderCategory({ children }: BlockHeaderProps) {
@@ -55,36 +59,89 @@ function BlockLabHeader({ children }: BlockHeaderProps) {
   return <td className="lab-header">{children}</td>;
 }
 
-function CourseComponent({ code, slot, type, venue }: CourseProps) {
-  var data: string = code + slot + type + venue;
-  return <td className="course-component">{data}</td>;
+function CourseComponent({ code, slot, type, venue }: Course) {
+  return (
+    <td className="course-component">
+      <div>{code}</div>
+      <div>{slot}</div>
+      <div>{type}</div>
+      <div>{venue}</div>
+    </td>
+  );
 }
 
-function EmptyCourseComponent({ children }: EmptyCourseProps) {
+function EmptyCourseComponent({ children }: EmptyCourse) {
   return <td className="empty-course">{children}</td>;
 }
 
-function FullDayComponent({ children }: dayOfWeekProps) {
+function FullDayComponent({ day, slotToCourse }: dayOfWeekProps) {
   return (
     <>
       <tr>
-        <BlockHeaderCategory>{children}</BlockHeaderCategory>
+        <BlockHeaderCategory>{day}</BlockHeaderCategory>
         <BlockHeaderSubCategory>{"Theory"}</BlockHeaderSubCategory>
-        {theorySlotMap.get(children)?.map((slot, index) => (
-          <EmptyCourseComponent key={index}>{slot}</EmptyCourseComponent>
-        ))}
+        {theorySlotMap.get(day)?.map((slot, index) => {
+          if (slotToCourse.has(slot)) {
+            const course = slotToCourse.get(slot);
+            const code = course?.code || "";
+            const type = course?.type || "";
+            const venue = course?.venue || "";
+            return (
+              <CourseComponent
+                code={code}
+                slot={slot}
+                type={type}
+                venue={venue}
+                key={index}
+              ></CourseComponent>
+            );
+          } else
+            return (
+              <EmptyCourseComponent
+                key={index}
+                children={slot}
+              ></EmptyCourseComponent>
+            );
+        })}
       </tr>
       <tr>
-        <BlockHeaderSubCategory>{"Lab"}</BlockHeaderSubCategory>        
-        {labSlotMap.get(children)?.map((slot, index) => (
-          <EmptyCourseComponent key={index}>{slot}</EmptyCourseComponent>
-        ))}
+        <BlockHeaderSubCategory>{"Lab"}</BlockHeaderSubCategory>
+        {labSlotMap.get(day)?.map((slot, index) => {
+          if (slotToCourse.has(slot)) {
+            const course = slotToCourse.get(slot);
+            const code = course?.code || "";
+            const type = course?.type || "";
+            const venue = course?.venue || "";
+            return (
+              <CourseComponent
+                code={code}
+                slot={slot}
+                type={type}
+                venue={venue}
+                key={index}
+              ></CourseComponent>
+            );
+          } else
+            return (
+              <EmptyCourseComponent
+                key={index}
+                children={slot}
+              ></EmptyCourseComponent>
+            );
+        })}
       </tr>
     </>
   );
 }
 
-const ViewTable = ({}: ViewTableProps) => {
+const ViewTable = ({ children }: ViewTableProps) => {
+  //create a map which maps the slot to the course
+  var slotToCourse = new Map<string, Course>();
+
+  for (const course of children) {
+    slotToCourse.set(course.slot, course);
+  }
+
   return (
     <table>
       <thead>
@@ -114,10 +171,14 @@ const ViewTable = ({}: ViewTableProps) => {
             <BlockLabHeader key={index}>{header}</BlockLabHeader>
           ))}
         </tr>
-      </thead>      
+      </thead>
       <tbody>
         {daysOfWeek.map((day, index) => (
-          <FullDayComponent key={index}>{day}</FullDayComponent>
+          <FullDayComponent
+            key={index}
+            day={day}
+            slotToCourse={slotToCourse}
+          ></FullDayComponent>
         ))}
       </tbody>
     </table>

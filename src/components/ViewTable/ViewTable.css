@@ -22,7 +22,7 @@ table {
   text-align: center;
   vertical-align: middle;
   padding: 3px;
-  width: 50px;
+  width: auto;
   background-color: #e2e2e2;
 }
 
@@ -31,7 +31,7 @@ table {
   text-align: center;
   vertical-align: middle;
   padding: 3px;
-  width: 50px;
+  width: auto;
   background-color: #ccccff;
 }
 
@@ -40,7 +40,7 @@ table {
   text-align: center;
   vertical-align: middle;
   padding: 3px;
-  width: 50px;
+  width: auto;
   background-color: #ccccff;
 }
 
@@ -49,7 +49,7 @@ table {
   text-align: center;
   vertical-align: middle;
   padding: 3px;
-  width: 50px;
+  width: auto;
   background-color: #CCFF33;
 }
 
@@ -58,6 +58,6 @@ table {
   text-align: center;
   vertical-align: middle;
   padding: 3px;
-  width: 50px;
+  width: auto;
   background-color: #FFFFCC;
 }
