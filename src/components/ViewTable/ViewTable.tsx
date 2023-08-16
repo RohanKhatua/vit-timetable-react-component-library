@@ -35,7 +35,7 @@ interface dayOfWeekProps {
   slotToCourse: Map<string, Course>;
 }
 
-function BlockHeaderCategory({ children }: BlockHeaderProps) {
+export function BlockHeaderCategory({ children }: BlockHeaderProps) {
   return (
     <td rowSpan={2} className="header-category">
       {children}
@@ -43,7 +43,7 @@ function BlockHeaderCategory({ children }: BlockHeaderProps) {
   );
 }
 
-function BlockHeaderSubCategory({ children }: BlockHeaderProps) {
+export function BlockHeaderSubCategory({ children }: BlockHeaderProps) {
   return (
     <td colSpan={2} className="header-subcategory">
       {children}
@@ -51,15 +51,15 @@ function BlockHeaderSubCategory({ children }: BlockHeaderProps) {
   );
 }
 
-function BlockTheoryHeader({ children }: BlockHeaderProps) {
+export function BlockTheoryHeader({ children }: BlockHeaderProps) {
   return <td className="theory-header">{children}</td>;
 }
 
-function BlockLabHeader({ children }: BlockHeaderProps) {
+export function BlockLabHeader({ children }: BlockHeaderProps) {
   return <td className="lab-header">{children}</td>;
 }
 
-function CourseComponent({ code, slot, type, venue }: Course) {
+export function CourseComponent({ code, slot, type, venue }: Course) {
   return (
     <td className="course-component">
       <div>{code}</div>
@@ -70,7 +70,7 @@ function CourseComponent({ code, slot, type, venue }: Course) {
   );
 }
 
-function EmptyCourseComponent({ children }: EmptyCourse) {
+export function EmptyCourseComponent({ children }: EmptyCourse) {
   return <td className="empty-course">{children}</td>;
 }
 
