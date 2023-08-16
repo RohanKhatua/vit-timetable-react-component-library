@@ -19,7 +19,7 @@ import {
   EmptyCourseComponent,
 } from "../ViewTable/ViewTable";
 
-interface OverrideCourseProp {
+export interface OverrideCourse {
   day: string;
   slot: string;
   code: string;
@@ -29,24 +29,19 @@ interface OverrideCourseProp {
 }
 
 export interface OverrideTableProps {
-  children: OverrideCourseProp[];
+  overrideCourses: OverrideCourse[];
 }
 
-interface uniqueCellIdentifier {
+export interface OverrideFullDayComponentProps {
   day: string;
-  slot: string;
+  slotDayToCourse: Map<string, Map<string, OverrideCourse>>;
 }
 
-interface OverrideFullDayComponentProps {
-  day: string;
-  slotDayToCourse: Map<string, Map<string, OverrideCourseProp>>;
-}
-
-interface OverrideFullDayRowProps {
+export interface OverrideFullDayRowProps {
   day: string;
   typeSlotMap: Map<string, string[]>;
-  rowName: string;
-  slotDayToCourse: Map<string, Map<string, OverrideCourseProp>>;
+  rowName: "THEORY" | "LAB";
+  slotDayToCourse: Map<string, Map<string, OverrideCourse>>;
 }
 
 function OverrideFullDayRowComponent({
@@ -62,7 +57,7 @@ function OverrideFullDayRowComponent({
         <BlockHeaderSubCategory>{rowName}</BlockHeaderSubCategory>
 
         {typeSlotMap.get(day)?.map((slot, index) => {
-          const uci: uniqueCellIdentifier = {
+          const uci = {
             day: day,
             slot: slot,
           };
@@ -125,10 +120,11 @@ function OverrideFullDayComponent({
   );
 }
 
-const OverrideTable = ({ children }: OverrideTableProps) => {
-  const slotDayToCourse = new Map<string, Map<string, OverrideCourseProp>>();
-  children.forEach((child) => {
-    const uci: uniqueCellIdentifier = {
+const OverrideTable = ({ overrideCourses }: OverrideTableProps) => {
+  const slotDayToCourse = new Map<string, Map<string, OverrideCourse>>();
+  //day to slot to course
+  overrideCourses.forEach((child) => {
+    const uci = {
       day: child.day,
       slot: child.slot,
     };
@@ -137,7 +133,7 @@ const OverrideTable = ({ children }: OverrideTableProps) => {
       const cell = slotDayToCourse.get(uci.day);
       cell?.set(uci.slot, child);
     } else {
-      const cell = new Map<string, OverrideCourseProp>();
+      const cell = new Map<string, OverrideCourse>();
       cell.set(uci.slot, child);
       slotDayToCourse.set(uci.day, cell);
     }
