@@ -53,8 +53,8 @@ function OverrideFullDayRowComponent({
   return (
     <>
       <tr>
-        <BlockHeaderCategory>{day}</BlockHeaderCategory>
-        {/* <BlockHeaderSubCategory>{rowName}</BlockHeaderSubCategory> */}
+        {rowName=="THEORY"?<BlockHeaderCategory>{day}</BlockHeaderCategory>:<></>}
+        {<BlockHeaderSubCategory>{rowName}</BlockHeaderSubCategory> }
 
         {typeSlotMap.get(day)?.map((slot, index) => {
           const uci = {
