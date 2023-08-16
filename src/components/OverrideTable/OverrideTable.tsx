@@ -19,12 +19,13 @@ import {
   EmptyCourseComponent,
 } from "../ViewTable/ViewTable";
 
-export interface OverrideCourseProp {
+interface OverrideCourseProp {
   day: string;
   slot: string;
   code: string;
   type: string;
   venue: string;
+  CustomCourseComponent?: React.ReactNode | undefined;
 }
 
 export interface OverrideTableProps {
@@ -41,85 +42,85 @@ interface OverrideFullDayComponentProps {
   slotDayToCourse: Map<string, Map<string, OverrideCourseProp>>;
 }
 
+interface OverrideFullDayRowProps {
+  day: string;
+  typeSlotMap: Map<string, string[]>;
+  rowName: string;
+  slotDayToCourse: Map<string, Map<string, OverrideCourseProp>>;
+}
+
+function OverrideFullDayRowComponent({
+  day,
+  typeSlotMap,
+  rowName,
+  slotDayToCourse,
+}: OverrideFullDayRowProps) {
+  return (
+    <>
+      <tr>
+        <BlockHeaderCategory>{day}</BlockHeaderCategory>
+        <BlockHeaderSubCategory>{rowName}</BlockHeaderSubCategory>
+
+        {typeSlotMap.get(day)?.map((slot, index) => {
+          const uci: uniqueCellIdentifier = {
+            day: day,
+            slot: slot,
+          };
+          // console.log(slotDayToCourse);
+          // console.log(uci);
+
+          if (slotDayToCourse.has(uci.day)) {
+            const cell = slotDayToCourse.get(uci.day);
+
+            if (cell?.has(uci.slot)) {
+              const CustomCourseComponent =
+                cell?.get(uci.slot)?.CustomCourseComponent || null;
+              return CustomCourseComponent ? (
+                <td key={index}>
+                  <div>{CustomCourseComponent}</div>
+                </td>
+              ) : (
+                <td key={index}>
+                  <div>
+                    <CourseComponent
+                      code={cell?.get(uci.slot)?.code || ""}
+                      type={cell?.get(uci.slot)?.type || ""}
+                      venue={cell?.get(uci.slot)?.venue || ""}
+                      slot={slot}
+                    />
+                  </div>
+                </td>
+              );
+            } else {
+              return <EmptyCourseComponent key={index} children={slot} />;
+            }
+          } else {
+            return <EmptyCourseComponent key={index} children={slot} />;
+          }
+        })}
+      </tr>
+    </>
+  );
+}
+
 function OverrideFullDayComponent({
   day,
   slotDayToCourse,
 }: OverrideFullDayComponentProps) {
   return (
     <>
-      <tr>
-        <BlockHeaderCategory>{day}</BlockHeaderCategory>
-        <BlockHeaderSubCategory>{"Theory"}</BlockHeaderSubCategory>
-
-        {theorySlotMap.get(day)?.map((slot, index) => {
-          const uci: uniqueCellIdentifier = {
-            day: day,
-            slot: slot,
-          };
-          // console.log(slotDayToCourse);
-          // console.log(uci);
-
-          if (slotDayToCourse.has(uci.day)) {
-            const cell = slotDayToCourse.get(uci.day);
-
-            if (cell?.has(uci.slot)) {
-              const code = cell?.get(uci.slot)?.code || "";
-              const type = cell?.get(uci.slot)?.type || "";
-              const venue = cell?.get(uci.slot)?.venue || "";
-
-              return (
-                <CourseComponent
-                  key={index}
-                  slot={slot}
-                  code={code}
-                  type={type}
-                  venue={venue}
-                />
-              );
-            } else {
-              return <EmptyCourseComponent key={index} children={slot} />;
-            }
-          } else {
-            return <EmptyCourseComponent key={index} children={slot} />;
-          }
-        })}
-      </tr>
-      <tr>
-        <BlockHeaderSubCategory>{"Lab"}</BlockHeaderSubCategory>
-
-        {labSlotMap.get(day)?.map((slot, index) => {
-          const uci: uniqueCellIdentifier = {
-            day: day,
-            slot: slot,
-          };
-          // console.log(slotDayToCourse);
-          // console.log(uci);
-
-          if (slotDayToCourse.has(uci.day)) {
-            const cell = slotDayToCourse.get(uci.day);
-
-            if (cell?.has(uci.slot)) {
-              const code = cell?.get(uci.slot)?.code || "";
-              const type = cell?.get(uci.slot)?.type || "";
-              const venue = cell?.get(uci.slot)?.venue || "";
-
-              return (
-                <CourseComponent
-                  key={index}
-                  slot={slot}
-                  code={code}
-                  type={type}
-                  venue={venue}
-                />
-              );
-            } else {
-              return <EmptyCourseComponent key={index} children={slot} />;
-            }
-          } else {
-            return <EmptyCourseComponent key={index} children={slot} />;
-          }
-        })}
-      </tr>
+      <OverrideFullDayRowComponent
+        day={day}
+        typeSlotMap={theorySlotMap}
+        rowName={"THEORY"}
+        slotDayToCourse={slotDayToCourse}
+      />
+      <OverrideFullDayRowComponent
+        day={day}
+        typeSlotMap={labSlotMap}
+        rowName={"LAB"}
+        slotDayToCourse={slotDayToCourse}
+      />
     </>
   );
 }
