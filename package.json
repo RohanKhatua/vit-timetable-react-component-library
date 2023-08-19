@@ -3,13 +3,13 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/RohanKhatua"
   },
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A simple extendable Component library to be used in react projects for showing VIT Timetables",
   "scripts": {
     "rollup": "rollup -c --bundleConfigAsCjs",
     "dev": "rollup -c --bundleConfigAsCjs -w",
-    "publish:npm": "npm publish --registry=https://registry.npmjs.org/",   
-    "publish:github": "npm publish",   
+    "publish:npm": "npm publish --registry=https://registry.npmjs.org/",
+    "publish:github": "npm publish",
     "publish:both": "npm run publish:npm && npm run publish:github"
   },
   "author": "Rohan Khatua",
