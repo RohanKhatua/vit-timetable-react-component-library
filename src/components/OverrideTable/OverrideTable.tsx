@@ -53,8 +53,12 @@ function OverrideFullDayRowComponent({
   return (
     <>
       <tr>
-        {rowName=="THEORY"?<BlockHeaderCategory>{day}</BlockHeaderCategory>:<></>}
-        {<BlockHeaderSubCategory>{rowName}</BlockHeaderSubCategory> }
+        {rowName == "THEORY" ? (
+          <BlockHeaderCategory>{day}</BlockHeaderCategory>
+        ) : (
+          <></>
+        )}
+        {<BlockHeaderSubCategory>{rowName}</BlockHeaderSubCategory>}
 
         {typeSlotMap.get(day)?.map((slot, index) => {
           const uci = {
@@ -71,9 +75,9 @@ function OverrideFullDayRowComponent({
               const CustomCourseComponent =
                 cell?.get(uci.slot)?.CustomCourseComponent || null;
               return CustomCourseComponent ? (
-                <td key={index}>
-                  <div>{CustomCourseComponent}</div>
-                </td>
+                <React.Fragment key={index}>
+                  {CustomCourseComponent}
+                </React.Fragment>
               ) : (
                 <td key={index}>
                   <div>
