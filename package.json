@@ -1,8 +1,5 @@
 {
-  "name": "@rohankhatua/vit-timetable-react-component-library",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/RohanKhatua"
-  },
+  "name": "@rohankhatua/vit-timetable-react-component-library", 
   "version": "0.0.4",
   "description": "A simple extendable Component library to be used in react projects for showing VIT Timetables",
   "scripts": {
