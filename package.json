@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/RohanKhatua"
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A simple extendable Component library to be used in react projects for showing VIT Timetables",
   "scripts": {
     "rollup": "rollup -c --bundleConfigAsCjs",
