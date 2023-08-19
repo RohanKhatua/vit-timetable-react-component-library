@@ -1,6 +1,6 @@
 {
-  "name": "@rohankhatua/vit-timetable-react-component-library", 
-  "version": "0.0.4",
+  "name": "@rohankhatua/vit-timetable-react-component-library",
+  "version": "0.0.5",
   "description": "A simple extendable Component library to be used in react projects for showing VIT Timetables",
   "scripts": {
     "rollup": "rollup -c --bundleConfigAsCjs",
